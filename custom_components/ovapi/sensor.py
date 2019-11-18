@@ -219,6 +219,8 @@ class OvApiSensor(Entity):
 
         stops_list = []
         for stop in stops:
+            if stop['JourneyStopType'] == 'LAST':
+                continue
             if self._line_filter == ATTR_LINE_FILTER or stop['LinePublicNumber'] in self._line_filter.split(", "):
                 target_departure_time = datetime.strptime(stop['TargetDepartureTime'], "%Y-%m-%dT%H:%M:%S")
                 expected_arrival_time = datetime.strptime(stop['ExpectedDepartureTime'], "%Y-%m-%dT%H:%M:%S")
